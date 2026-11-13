@@ -228,7 +228,7 @@ kpis = [
      f'="baseline today: "&TEXT(IF(B8=0,0,COUNTIFS({FLT},{T}[Baseline approval date],"<="&$L$4)/B8),"0%")&" approved"'),
     ("L", "Overdue", f'=COUNTIFS({FLT},{T}[Approved and filed date],"=",{T}[Forecast approval date],"<"&$L$4)',
      "0", '="open, forecast date passed"'),
-    ("N", "Behind baseline", f'=COUNTIFS({FLT},{T}[Baseline approval date],"<="&$L$4)-D8', "0",
+    ("N", "Behind baseline", f'=COUNTIFS({FLT},{T}[Baseline approval date],"<="&$L$4)-COUNTIFS({FLT},{T}[Baseline approval date],"<="&$L$4,{T}[Approved and filed date],"<="&$L$4)', "0",
      '="docs vs. baseline plan today"'),
 ]
 for col, label, f, fmt, sub in kpis:

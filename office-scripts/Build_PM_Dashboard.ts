@@ -230,7 +230,7 @@ function main(workbook: ExcelScript.Workbook) {
     ["J", "Weighted progress", `=IF(B8=0,0,SUMPRODUCT(${MASK}*${c(COL.statusPct)})/(100*B8))`, "0%",
       `="baseline today: "&TEXT(IF(B8=0,0,COUNTIFS(${FLT},${c(COL.baseline)},"<="&$L$4)/B8),"0%")&" approved"`],
     ["L", "Overdue", `=COUNTIFS(${FLT},${c(COL.msApproved)},"=",${c(COL.forecast)},"<"&$L$4)`, "0", `="open, forecast date passed"`],
-    ["N", "Behind baseline", `=COUNTIFS(${FLT},${c(COL.baseline)},"<="&$L$4)-D8`, "0", `="docs vs. baseline plan today"`],
+    ["N", "Behind baseline", `=COUNTIFS(${FLT},${c(COL.baseline)},"<="&$L$4)-COUNTIFS(${FLT},${c(COL.baseline)},"<="&$L$4,${c(COL.msApproved)},"<="&$L$4)`, "0", `="docs vs. baseline plan today"`],
   ];
   kpis.forEach(([col, label, f, nf, sub]) => {
     const c2 = col === "B" ? "B" : String.fromCharCode(col.charCodeAt(0) + 1);

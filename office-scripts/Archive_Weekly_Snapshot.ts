@@ -48,19 +48,27 @@ function main(workbook: ExcelScript.Workbook): string {
   let ht = workbook.getTable(HIST_TABLE);
   if (!sh) sh = workbook.addWorksheet(HIST_SHEET);
   if (!ht) {
+    // first run: write header + this week's rows together, then make it a table
+    // (a table created from a header row only gets an empty first data row)
     const head = ["Snapshot date", "Scope", "Total", ...STATUSES.map(s => s[0]), "Approved %", "Weighted %"];
-    const hdr = sh.getRangeByIndexes(0, 0, 1, head.length);
-    hdr.setValues([head]);
-    ht = sh.addTable(hdr, true);
+    const block = sh.getRangeByIndexes(0, 0, rows.length + 1, head.length);
+    block.setValues([head, ...rows]);
+    ht = sh.addTable(block, true);
     ht.setName(HIST_TABLE);
+  } else {
+    // remove rows already written today (re-run safe)
+    const body = ht.getRangeBetweenHeaderAndTotal().getValues();
+    for (let i = body.length - 1; i >= 0; i--) {
+      if (Number(body[i][0]) === today) ht.deleteRowsAt(i, 1);
+    }
+    ht.addRows(-1, rows);
+    // a table can't be empty: if all old rows were today's, Excel kept one blank row – drop it
+    const after = ht.getRangeBetweenHeaderAndTotal().getValues();
+    for (let i = after.length - 1; i >= 0; i--) {
+      if (after[i].every(v => String(v).trim() === "")) ht.deleteRowsAt(i, 1);
+    }
   }
-  // remove rows already written today (re-run safe)
-  const body = ht.getRangeBetweenHeaderAndTotal().getValues();
-  for (let i = body.length - 1; i >= 0; i--) {
-    if (Number(body[i][0]) === today) ht.deleteRowsAt(i, 1);
-  }
-  ht.addRows(-1, rows);
-  const n = ht.getRowCount();
+  const n = rows.length;
   const rng = ht.getRangeBetweenHeaderAndTotal();
   rng.getColumn(0).setNumberFormat("dd/mm/yyyy");
   rng.getColumn(10).setNumberFormat("0%");

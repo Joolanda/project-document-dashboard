@@ -20,7 +20,9 @@ All of these follow three filters on the dashboard:
 | --- | --- |
 | Work Package | All · one WP · *Custom selection* (several WPs, ticked in a side panel) |
 | Document set | All documents · Key deliverables · any set defined as a Yes/No column |
-| Status date | Today by default; overwrite it to see an earlier status |
+| Status date | Today by default; overwrite it to see an earlier status (see note below) |
+
+> **Note on the status date.** Figures based on dates follow the status date: *Approved & filed*, *Overdue*, *Behind baseline*, the S-curve and the attention list. Figures based on the current *Status* column do not: *In review / approval*, *Not started*, *Weighted progress*, the document flow and the status matrices always show the status as it is now. For a true look back at those, use the weekly snapshots in *PM History*.
 
 ## Repository layout
 
@@ -69,3 +71,7 @@ This repository contains **no real project data**. Document IDs, titles, owners 
 | --- | --- |
 | Demo workbook | Formulas verified against an independent calculation for several filter combinations |
 | Office Scripts | Type-checked against the official ExcelScript API definitions; **not yet run in Excel**. Test on a copy first. |
+
+## License
+
+[MIT](LICENSE) – free to use and adapt; no warranty.

@@ -32,7 +32,7 @@ Open **WBS_Document_Dashboard_DEMO.xlsx** and try the filters before building an
 2. Set **Work Package** to `WP06 - Commissioning Preparation`. All tiles, the S-curve and the lists now show WP06 only.
 3. Set **Work Package** to `Custom selection`. The panel on the right (*WP selection*) decides which WPs count; WP02 and WP03 are marked "Yes". Add or remove a "Yes" and watch the numbers change.
 4. Set **Document set** to `Key deliverables`. Combined with step 3 you now see the key deliverables of WP02 + WP03.
-5. Overwrite the **Status date** with an earlier date to see the dashboard as it looked then. Type `=TODAY()` to reset.
+5. Overwrite the **Status date** with an earlier date to see the dashboard as it looked then. Type `=TODAY()` to reset. Only the date-based figures go back in time (approved, overdue, behind baseline, S-curve, attention list); tiles and tables based on the *Status* column keep showing today's status.
 6. Tab **Documents**: change one document's *Status* or *Approved and filed date* and check that the dashboard follows.
 
 The grey columns *Dash WP selected* and *Dash in set* at the end of the Documents table are calculated helper columns. Nobody types in them.
@@ -107,7 +107,7 @@ The dashboard answers most stakeholder questions with two clicks; share the scre
 | "What about the key deliverables?" | Document set → `Key deliverables` (combines with any WP choice) |
 | "Which WP is behind?" | Scroll to *Status per Work Package*: all WPs side by side |
 | "Who needs to act?" | *Attention list*: overdue documents with owner and days late |
-| "What did it look like at the last steering meeting?" | Type that date in *Status date* |
+| "What did it look like at the last steering meeting?" | Type that date in *Status date* for approvals and the S-curve; use *PM History* for the status counts of that week |
 | A question the dashboard doesn't cover | Ask Copilot in Excel (see the prompt file), e.g. "average days from draft review to approval per WP" |
 
 Reading the S-curve: grey dotted = baseline agreed at the start; solid blue = documents approved up to today; dashed blue = forecast from the owners' planned dates. A gap between grey and blue is the delay in documents; where the dashed line meets 100% is the forecast completion date.
