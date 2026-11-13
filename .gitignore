@@ -1,0 +1,50 @@
+# Data policy safeguard: no real tracker files, exports, screenshots or recordings.
+# Only the fictitious demo workbook, the rollout-guide PDF and the demo screenshots are allowed.
+
+# Spreadsheets and exports
+*.xlsx
+*.xlsm
+*.xlsb
+*.xls
+*.csv
+*.tsv
+*.ods
+!demo/*.xlsx
+
+# Documents
+*.pdf
+*.docx
+*.doc
+*.pptx
+*.msg
+*.eml
+!docs/*.pdf
+
+# Screenshots and recordings
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+*.heic
+*.mp4
+*.mov
+*.webm
+!docs/images/*.png
+
+# Excel lock / temp files
+~$*
+*.tmp
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
